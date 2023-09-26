@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemons</title>
+  </head>
+  <body>
+    <div>
+    <input type="text" id="pokefinder"> </div>
+    <button onclick="getPokemon(document.querySelector('#pokefinder').value)"> Search </button>
+      <img width="96" height="96" />
+      <p>Number: <span id="id"></span></p>
+      <p>Name: <span id="name"></span></p>
+      <p>Type: <span id="type"></span></p>
+    </div>
+    <script>
+      async function getPokemon(pokemon) {
+        if(pokemon === null) return;
+        try {
+          const url = "https://pokeapi.co/api/v2/pokemon/"+pokemon;
+          console.log(url);
+          const response = await fetch(url);
+          if (!response.ok) throw new Error("Failed");
+          let lilpoke = await response.json();
+          document.querySelector("img").src = lilpoke.sprites.front_shiny;
+          document.querySelector("#id").innerHTML = lilpoke.id;
+          document.querySelector("#name").innerHTML = lilpoke.name;
+          let types = lilpoke.types[0].type.name;
+          console.log(types)
+
+          document.querySelector("#type").innerHTML = types;
+
+          console.log(lilpoke.name);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      getPokemon();
+    </script>
+  </body>
+</html>

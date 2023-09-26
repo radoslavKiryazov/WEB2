@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemons</title>
+  </head>
+  <body>
+    <script>
+      fetch("https://pokeapi.co/api/v2/pokemon/eevee")
+        .then((response) => {
+          if (response.ok) return response.json();
+          throw new Error("Network Error!");
+        })
+        .then((poke) => {
+          let elem = document.createElement("label");
+          elem.innerHTML = poke.name;
+          document.getElementsByTagName("body")[0].appendChild(elem);
+        })
+        .catch((error) => console.log(error));
+    </script>
+  </body>
+</html>
