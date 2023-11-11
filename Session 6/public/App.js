@@ -4,11 +4,12 @@ function Board() {
 
   function handleClick(i) {
     const nextSquares = squares.slice();
-    if (squares[i] || calculateWinner(squares)) return;
+    if (squares[i] || calculateWinner(squares)) return; //no change or there is winner, so breakout
     if (xIsNext ? (nextSquares[i] = "X") : (nextSquares[i] = "0"))
       setSquares(nextSquares);
     setXIsNext(!xIsNext);
   }
+  
   const winner = calculateWinner(squares);
   let status;
   if (
